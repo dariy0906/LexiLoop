@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="LexiLoop">
+  <rect width="512" height="512" rx="116" fill="#0b8a7a"/>
+  <g fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="27">
+    <path d="M256 168c-38-28-93-24-126 9v160c33-33 88-37 126-9 38-28 93-24 126 9V177c-33-33-88-37-126-9Z"/>
+    <path d="M256 168v160"/>
+  </g>
+</svg>

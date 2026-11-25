@@ -1,0 +1,15 @@
+\ir schema.sql
+\ir migrations/002_gamification.sql
+\ir migrations/003_lesson_question_types.sql
+\ir migrations/004_retry_and_session_cleanup.sql
+\ir migrations/005_cartoons.sql
+\ir migrations/006_cartoon_youtube.sql
+\ir seed/cartoons.sql
+\ir migrations/009_more_cartoon_words.sql
+\ir migrations/010_context_translation_cache.sql
+\ir migrations/011_game_unlock_grants.sql
+\ir migrations/012_arena_matchmaking_queue.sql
+\ir migrations/013_demo_users.sql
+\ir migrations/014_bonus_cartoons.sql
+\ir migrations/015_demo_users_november_6.sql
+\ir migrations/016_arena_pvp_matches.sql

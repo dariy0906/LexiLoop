@@ -1,0 +1,26 @@
+{
+  "expo": {
+    "name": "LexiLoop",
+    "slug": "lexiloop-android",
+    "version": "1.0.1",
+    "orientation": "portrait",
+    "scheme": "lexiloop",
+    "userInterfaceStyle": "light",
+    "platforms": [
+      "android"
+    ],
+    "android": {
+      "package": "ce.denoir.lexiloop",
+      "versionCode": 2
+    },
+    "extra": {
+      "eas": {
+        "projectId": "fc09ff2c-9ab3-4876-9624-697d2ae8bb25"
+      }
+    },
+    "owner": "dariy22855",
+    "plugins": [
+      "expo-notifications"
+    ]
+  }
+}

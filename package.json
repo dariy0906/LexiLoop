@@ -6,21 +6,35 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test": "node --import tsx --test tests/*.test.ts",
+    "test:live": "node --env-file=.env.local tests/live.mjs",
+    "test:game-live": "node --env-file=.env.local tests/gamification-live.mjs",
+    "test:cartoons-live": "node --env-file=.env.local tests/cartoons-live.mjs",
+    "test:context-live": "node --env-file=.env.local --import tsx tests/context-translation-live.mjs",
+    "wordly:prepare": "node --env-file=.env.local --import tsx scripts/prepare-wordly.ts",
+    "db:seed-demo-users": "node --env-file=.env.local --import tsx scripts/seed-demo-users.ts"
   },
   "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "lucide-react": "^1.63.0",
     "next": "16.4.3",
+    "pg": "^8.23.1",
     "react": "19.3.0",
-    "react-dom": "19.3.0"
+    "react-dom": "19.3.0",
+    "recharts": "^3.10.1",
+    "zod": "^4.6.7"
   },
   "devDependencies": {
     "@tailwindcss/turbopack": "^4",
     "@types/node": "^20",
+    "@types/pg": "^8.23.1",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.4.3",
     "tailwindcss": "^4",
+    "tsx": "^4.23.15",
     "typescript": "^5"
   }
 }

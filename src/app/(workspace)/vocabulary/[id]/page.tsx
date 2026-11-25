@@ -1,0 +1,15 @@
+'use client';
+import { useParams,useRouter } from 'next/navigation';
+import Link from 'next/link';
+import { useState } from 'react';
+import { ArrowLeft, CalendarDays, Heart, Pencil, Trash2 } from 'lucide-react';
+import { useLibrary } from '@/features/library-context';
+import { WordForm } from '@/features/WordForm';
+import { api } from '@/lib/client';
+import { masteryLabel } from '@/lib/scheduler';
+export default function WordDetail(){const {id}=useParams<{id:string}>(),router=useRouter(); const {words,categories,states,refresh,loading}=useLibrary(),[editing,setEditing]=useState(false),[error,setError]=useState('');const word=words.find((w)=>w.id===id),state=states.find((s)=>s.word_id===id);if(loading)return <div className="page-state">Opening word…</div>;if(!word)return <div className="page-state">Word not found. <Link href="/vocabulary">Back to vocabulary</Link></div>;if(editing)return <WordForm existing={word}/>;
+  async function favorite(){try{await api(`/words/${id}`,'PATCH',{favorite:!word?.favorite});await refresh();}catch(e){setError(e instanceof Error?e.message:'Could not update.');}}
+  async function remove(){if(!confirm(`Delete “${word?.word}”?`))return;try{await api(`/words/${id}`,'DELETE');await refresh();router.push('/vocabulary');}catch(e){setError(e instanceof Error?e.message:'Could not delete.');}}
+  return <div className="page-stack narrow-page"><Link href="/vocabulary" className="back-link"><ArrowLeft size={17}/> Vocabulary</Link><div className="word-detail-head"><div><span className="eyebrow">WORD DETAIL</span><h1>{word.word}</h1><p>{word.phonetic||'Your vocabulary notebook'}</p></div><div className="detail-actions"><button className={`icon-btn ${word.favorite?'favorite':''}`} onClick={favorite} aria-label="Toggle favorite"><Heart size={19} fill={word.favorite?'currentColor':'none'}/></button><button className="button button-outline" onClick={()=>setEditing(true)}><Pencil size={16}/> Edit</button></div></div>{error&&<div className="error-box">{error}</div>}<div className="panel detail-panel"><div className="detail-top"><span className="mastery-pill">{masteryLabel(word.mastery_level)}</span>{categories.find((c)=>c.id===word.category_id)&&<span className="tag">{categories.find((c)=>c.id===word.category_id)?.name}</span>}</div><Detail label="ENGLISH DEFINITION" value={word.definition_en}/><div className="form-grid"><Detail label="RUSSIAN" value={word.translation_ru}/><Detail label="KAZAKH" value={word.translation_kk}/></div><Detail label="EXAMPLE SENTENCE" value={word.example_sentence}/><Detail label="YOUR NOTES" value={word.notes}/></div><div className="panel detail-foot"><span><CalendarDays size={17}/> Next review: {state?new Date(state.next_review_at).toLocaleDateString():'Ready now'}</span><span>Added {new Date(word.created_at).toLocaleDateString()}</span></div><button className="danger-link" onClick={remove}><Trash2 size={16}/> Delete word</button></div>;
+}
+function Detail({label,value}:{label:string;value:string|null}){return <div className="detail-field"><span className="eyebrow">{label}</span><p>{value||'Not added yet'}</p></div>}
